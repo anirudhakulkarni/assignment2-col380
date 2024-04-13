@@ -45,7 +45,7 @@ def make_folders_like_template():
     os.system('find submission_unziped -name "__MACOSX" -type d -exec rm -rf {} +')
     source_folder = 'submission_unziped/'
     destination_folder = "playground/"
-    filename_contains = ["subtask1", "subtask2", "subtask3", "subtask4"]
+    filename_contains = ["subtask1", "subtask2", "subtask3", "subtask4","preprocessing"]
     new_filename = ["assignment2_subtask1","assignment2_subtask2","assignment2_subtask3","assignment2_subtask4"]
     # Iterate over all files in the source folder
     for i in range(0,4): 
@@ -59,16 +59,14 @@ def make_folders_like_template():
                     if not os.path.exists(folder_path):
                         os.system("cp -r playground/TEMPLATE " + folder_path)
                     source_file = os.path.join(root, file)
-                    # os.system("cp ")
+
                     destination_file = destination_folder + root.split('/')[1]+ "/src/" + new_filename[i] +"." + file.split('.')[-1]
-                    print(destination_file)
                     # Rename the file
                     shutil.copy(source_file, destination_file)
                     print(f"'{file}' renamed to '{new_filename[i]}'")
 
     # If no file containing the specified text is found
     print(f"No file containing '{filename_contains}' found in '{source_folder}'")
-    
 def make_for_each_subtask():
     solution_folder = 'submission_unziped'
     for filename in os.listdir(solution_folder):
@@ -82,6 +80,32 @@ def make_for_each_subtask():
         resultcode4 = os.system("make subtask4")
         print(resultcode1,resultcode2,resultcode3,resultcode4)
         os.chdir("../../")
-    
-function_to_unzip_files_in_submissions()
-make_folders_like_template()
+
+def hoot():
+    source_folder = "submission_unziped"
+    for root, dirs, files in os.walk(source_folder):
+        print(root)
+# function_to_unzip_files_in_submissions()
+# make_folders_like_template()
+# hoot()
+
+import os
+
+def list_directories(path):
+    """
+    Lists all the directories at the specified path.
+    """
+    with os.scandir(path) as entries:
+        for entry in entries:
+            if entry.is_dir():
+                print(entry.name)
+                destnation="playground/"+entry.name.split("/")[0]+"/"
+                cmd = "find submission_unzipped/"+entry.name+" -type f \( -name 'preprocess.py' -o -name 'Makefile' \) -exec cp {} "+destnation+" \;"
+                # " -type f \( -name 'preprocess.py' -o -name 'Makefile' \) -exec cp {} playground/cs1210081_cs1210070_cs1210559/ \;"
+                print("ran ",cmd)
+                os.system(cmd)
+
+
+# Specify the path to your source folder here
+source_folder_path = 'submission_unziped'
+list_directories(source_folder_path)
