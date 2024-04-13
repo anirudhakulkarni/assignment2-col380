@@ -19,13 +19,13 @@ def function_to_unzip_files_in_submissions():
         # Move the file
         shutil.copy(source_path, destination_path)
         print(f"Moved {filename} to {destination_dir}")
-
+        dir_path = destination_path.split('.')[0]
         # Check if the file is a zip file and unzip it
         if filename.endswith('.zip'):
             try:
                 with zipfile.ZipFile(destination_path, 'r') as zip_ref:
                     # Extract all the contents into destination directory
-                    zip_ref.extractall(destination_dir)
+                    zip_ref.extractall(dir_path)
                     print(f"Unzipped {filename}")
                     os.remove(destination_path)
             except zipfile.BadZipFile:
@@ -34,19 +34,18 @@ def function_to_unzip_files_in_submissions():
         if filename.endswith('.tar') or filename.endswith('.tar.gz') or filename.endswith('.tar.bz2'):
             try:
                 with tarfile.open(destination_path, 'r:*') as tar:
-                    tar.extractall(path=destination_dir)
+                    tar.extractall(path=dir_path)
                     print(f"Extracted {filename}")
                     os.remove(destination_path)
             except tarfile.TarError:
                 print(f"Failed to extract {filename}, it may be corrupted.")
     # Final message
     print("All files have been moved and unzipped if applicable.")
-
 def make_folders_like_template():
-    os.system("rm -rf submission_unziped/__MACOSX")
+    os.system('find submission_unziped -name "__MACOSX" -type d -exec rm -rf {} +')
     source_folder = 'submission_unziped/'
     destination_folder = "playground/"
-    filename_contains = ["subtask1","subtask2","subtask3","subtask4"]
+    filename_contains = ["subtask1", "subtask2", "subtask3", "subtask4"]
     new_filename = ["assignment2_subtask1","assignment2_subtask2","assignment2_subtask3","assignment2_subtask4"]
     # Iterate over all files in the source folder
     for i in range(0,4): 
@@ -54,12 +53,14 @@ def make_folders_like_template():
             for file in files:
                 if filename_contains[i] in file:
                     # Construct source and destination paths
-                    folder_path = destination_folder + root.split('/')[-1]
+                    folder_path = destination_folder + root.split('/')[1]
+                    print(folder_path)
+                    print(root,dirs,files)
                     if not os.path.exists(folder_path):
-                        os.system("cp -r playground/template " + folder_path)
+                        os.system("cp -r playground/TEMPLATE " + folder_path)
                     source_file = os.path.join(root, file)
-                    os.system("cp ")
-                    destination_file = destination_folder + root.split('/')[-1]+ "/src/" + new_filename[i] +"." + file.split('.')[-1]
+                    # os.system("cp ")
+                    destination_file = destination_folder + root.split('/')[1]+ "/src/" + new_filename[i] +"." + file.split('.')[-1]
                     print(destination_file)
                     # Rename the file
                     shutil.copy(source_file, destination_file)
@@ -67,8 +68,7 @@ def make_folders_like_template():
 
     # If no file containing the specified text is found
     print(f"No file containing '{filename_contains}' found in '{source_folder}'")
-
-
+    
 def make_for_each_subtask():
     solution_folder = 'submission_unziped'
     for filename in os.listdir(solution_folder):
@@ -83,6 +83,5 @@ def make_for_each_subtask():
         print(resultcode1,resultcode2,resultcode3,resultcode4)
         os.chdir("../../")
     
-# function_to_unzip_files_in_submissions()
+function_to_unzip_files_in_submissions()
 make_folders_like_template()
-# make_for_each_subtask()
