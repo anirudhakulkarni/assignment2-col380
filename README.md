@@ -1,4 +1,5 @@
 # assignment2-col380
+Case 1 to 6 look at the subpart1 and subpart2 (a)
 ```
 correct_answers/
 └── subtask12
@@ -40,7 +41,7 @@ correct_answers/
             └── output.txt
 ```
 
-Case 1 to 6 look at the subpart1 and subpart2 (a)
+Case 7 to 9 look at (b) of subpart1 and subpart2
 ```
     ├── case7 (0, 10, 10),  # Small matrix with ReLU
     │   ├── input
@@ -58,9 +59,8 @@ Case 1 to 6 look at the subpart1 and subpart2 (a)
         └── output
             └── output_activation.txt
 ```
-Case 7 to 9 look at (b) of subpart1 and subpart2
 
-
+Case 10, 11, and 12 look at (c) of subpart1 and subpart2
 ```
     ├── case10
     │   ├── input (0, 2, 10)
@@ -77,4 +77,23 @@ Case 7 to 9 look at (b) of subpart1 and subpart2
     │   │   └── pooled_2_poolsize_5_size_100x100.txt
     │   └── output
     │       └── pooled_2_type_0_poolsize_5_size_100x100.txt
+```
+
+Case 13, 14, and 15 look at (c) of subpart1 and subpart2
+```
+    ├── case13 (0, 10)
+    │   ├── input
+    │   │   └── vector.txt
+    │   └── output
+    │       └── t_vector.txt
+    ├── case14  (1, 50)
+    │   ├── input
+    │   │   └── vector.txt
+    │   └── output
+    │       └── t_vector.txt
+    ├── case15 (0, 100)
+    │   ├── input
+    │   │   └── vector.txt
+    │   └── output
+    │       └── t_vector.txt
 ```
