@@ -7,15 +7,12 @@ def read_file_to_floats(file_name):
             data.append(float_line)
     return data
 
-# Read the data from both files
-data1 = read_file_to_floats('op1')
-data2 = read_file_to_floats('op2')
-
+if __name__ == "__main__":
 # Compare the two datasets and count differences
-difference_count = 0
-for row1, row2 in zip(data1, data2):
-    for num1, num2 in zip(row1, row2):
-        if num1 != num2:
-            difference_count += 1
+    difference_count = 0
+    for row1, row2 in zip(data1, data2):
+        for num1, num2 in zip(row1, row2):
+            if num1 != num2:
+                difference_count += 1
 
-print(f'Number of different values: {difference_count}')
+    print(f'Number of different values: {difference_count}')

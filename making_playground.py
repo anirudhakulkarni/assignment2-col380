@@ -95,6 +95,7 @@ def make_like_template():
         # copying the source files if not in root 
         cmd = "find submission_unziped/"+ each +"/*/src -maxdepth 1 -type f -exec cp -p {} playground/"+ each +"/src \; "
         os.system(cmd)
+    return list_of_submissions
 
 if __name__ == "__main__":
     function_to_unzip_files_in_submissions()
